@@ -1,0 +1,9 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - vendor/**/*
+    - node_modules/**/*
+    - db/*
+    - db/fixtures/**/*
+    - tmp/**/*
