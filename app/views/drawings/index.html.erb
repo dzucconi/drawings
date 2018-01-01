@@ -1,0 +1,8 @@
+<% @drawings.each do |drawing| %>
+  <div class='Drawing'>
+    <%= link_to drawing, drawing %>
+    <%= link_to 'Delete', drawing, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
+
+<%= link_to 'Add', new_drawing_path %>

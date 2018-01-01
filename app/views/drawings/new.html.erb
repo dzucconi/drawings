@@ -1,0 +1,15 @@
+<%= form_for(@drawing) do |f| %>
+  <%= render 'common/errors', resource: @drawing %>
+
+  <%= f.text_field :title, placeholder: 'Title' %>
+
+  <%= f.text_field :width, placeholder: 'Width' %>
+
+  <%= f.text_field :height, placeholder: 'Height' %>
+
+  <%= f.text_field :units, placeholder: 'Units' %>
+
+  <%= f.file_field :image %>
+
+  <%= f.submit %>
+<% end %>

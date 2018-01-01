@@ -1,0 +1,15 @@
+<%= link_to 'Back', :back %>
+
+<h1><%= @drawing %></h1>
+
+<% @drawing.resized(width: 225, height: 225).tap do |image| %>
+  <img
+    src='<%= image.size(1) %>'
+    srcset='<%= image.size(1) %> 1x, <%= image.size(2) %> 2x'
+    width='<%= image.width %>'
+    height='<%= image.height %>'
+    alt='<%= @drawing %>'
+  >
+<% end %>
+
+<%= pretty_print(@drawing.to_json) %>
