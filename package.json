@@ -21,9 +21,6 @@
       "git add"
     ]
   },
-  "pre-commit": [
-    "lint-staged"
-  ],
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
     "normalize.css": "^7.0.0"
@@ -37,7 +34,6 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-prettier": "^2.3.1",
     "lint-staged": "^6.0.0",
-    "pre-commit": "^1.2.2",
     "prettier": "^1.9.1",
     "stylelint": "^8.3.1",
     "stylelint-config-standard": "^18.0.0",
