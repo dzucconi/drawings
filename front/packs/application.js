@@ -1,7 +1,7 @@
 import "./application.css";
 
 const init = () => {
-  document.body.insertAdjacentHTML("afterbegin", "Webpacker works!");
+  // TODO
 }
 
 document.addEventListener('DOMContentLoaded', init);
