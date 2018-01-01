@@ -1,12 +1,9 @@
 ruby '2.4.1'
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
-  "https://github.com/#{repo_name}.git"
-end
-
 gem 'autoprefixer-rails'
+gem 'aws-sdk', '~> 2.5', '>= 2.5.5'
+gem 'fastimage'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.4'
