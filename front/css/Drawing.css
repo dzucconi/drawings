@@ -1,0 +1,13 @@
+.Drawing {
+  margin: 1em auto;
+}
+  .Drawing__image {
+    text-align: center;
+    margin: 1em;
+  }
+
+  .Drawing__title {
+    font-size: 100%;
+    font-weight: normal;
+    text-align: center;
+  }

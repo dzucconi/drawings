@@ -23,17 +23,19 @@
   },
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
-    "normalize.css": "^7.0.0"
+    "normalize.css": "^7.0.0",
+    "rails-ujs": "^5.1.4"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.3",
-    "eslint": "^4.13.0",
+    "eslint": "^4.14.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-prettier": "^2.3.1",
     "lint-staged": "^6.0.0",
+    "postcss": "^6.0.14",
     "prettier": "^1.9.1",
     "stylelint": "^8.3.1",
     "stylelint-config-standard": "^18.0.0",

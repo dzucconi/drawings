@@ -1,9 +1,8 @@
 class DrawingsController < ApplicationController
-  # TODO: Authentication
-  # TODO: Error handling
+  before_action :require_admin!, except: [:index, :show]
 
   def index
-    @drawings = Drawing.all
+    @drawings = Drawing.order(created_at: :desc)
   end
 
   def show
@@ -19,21 +18,31 @@ class DrawingsController < ApplicationController
   end
 
   def create
-    drawing = Drawing.create!(drawing_params)
-    drawing.put(upload)
-    redirect_to drawings_path
+    @drawing = Drawing.new(drawing_params)
+
+    if @drawing.save
+      @drawing.put(upload) if upload.present?
+      redirect_to drawings_path, notice: 'You added a drawing.'
+    else
+      render :new
+    end
   end
 
   def update
-    drawing = Drawing.find(params[:id])
-    drawing.update!(drawing_params)
-    redirect_to :back
+    @drawing = Drawing.find(params[:id])
+
+    if @drawing.update(drawing_params)
+      @drawing.put(upload) if upload.present?
+      redirect_to @drawing, notice: 'You updated this drawing.'
+    else
+      render :edit
+    end
   end
 
   def destroy
     drawing = Drawing.find(params[:id])
     drawing.destroy
-    redirect_to :back
+    redirect_to drawings_path
   end
 
   private
@@ -41,13 +50,13 @@ class DrawingsController < ApplicationController
   def drawing_params
     params.require(:drawing).permit(
       :title,
-      :width,
-      :height,
-      :units
+      :format_id
     ).merge!(upload_params)
   end
 
   def upload_params
+    return {} unless upload.present?
+
     @upload_params ||= begin
       width, height = FastImage.size(upload)
 

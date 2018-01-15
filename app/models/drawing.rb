@@ -4,9 +4,7 @@
 #
 #  id                 :integer          not null, primary key
 #  title              :string
-#  width              :integer
-#  height             :integer
-#  units              :string
+#  format_id          :integer
 #  image_content_type :string
 #  image_filename     :string
 #  image_filesize     :integer
@@ -20,6 +18,8 @@ class Drawing < ApplicationRecord
   include Uploadable
 
   validates :title, presence: true
+
+  belongs_to :format
 
   def to_s
     title || image_filename || 'untitled'

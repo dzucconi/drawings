@@ -25,5 +25,9 @@ module Drawings
       g.helper false
       g.channel assets: false
     end
+
+    config.action_view.field_error_proc = proc { |tag|
+      "<span class='Field Field--error'>#{tag}</span>".html_safe
+    }
   end
 end

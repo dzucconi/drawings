@@ -1,7 +1,8 @@
-import "./application.css";
+import './application.css';
+import Rails from 'rails-ujs';
 
 const init = () => {
-  // TODO
+  Rails.start();
 }
 
 document.addEventListener('DOMContentLoaded', init);

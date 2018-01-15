@@ -1,6 +1,8 @@
 module Uploadable
   extend ActiveSupport::Concern
 
+  BUCKET = ENV['AWS_S3_BUCKET'].freeze
+
   included do
     validates :image_content_type, presence: true
     validates :image_filename, presence: true
@@ -18,7 +20,7 @@ module Uploadable
   def put(upload_io)
     client.put_object(
       body: upload_io.read,
-      bucket: bucket,
+      bucket: BUCKET,
       key: key,
       acl: 'public-read'
     )
@@ -26,13 +28,9 @@ module Uploadable
 
   def remove_image
     client.delete_object(
-      bucket: bucket,
+      bucket: BUCKET,
       key: key
     )
-  end
-
-  def bucket
-    ENV['AWS_S3_BUCKET']
   end
 
   def extension
@@ -43,22 +41,33 @@ module Uploadable
     "#{id}/#{File.basename(image_filename, extension).parameterize}#{extension}"
   end
 
-  def signed
+  def presigned_url
     Aws::S3::Resource.new
-                     .bucket(bucket)
+                     .bucket(BUCKET)
                      .object(key)
                      .presigned_url(:put, acl: 'public-read')
   end
 
-  def qualified
-    "https://#{bucket}.s3.amazonaws.com/#{key}"
+  def qualified_url
+    "https://#{BUCKET}.s3.amazonaws.com/#{key}"
+  end
+
+  def resize_source_url
+    ResizedImage.new(
+      url: qualified_url,
+      original_width: image_width,
+      original_height: image_height,
+      width: 2500,
+      height: 2500,
+      scale: ResizedImage::DEFAULT_SCALE
+    ).size(1)
   end
 
   def resized(width: nil, height: nil, scale: ResizedImage::DEFAULT_SCALE)
     ResizedImage.new(
-      url: self.qualified,
-      original_width: self.image_width,
-      original_height: self.image_height,
+      url: resize_source_url,
+      original_width: image_width,
+      original_height: image_height,
       width: width,
       height: height,
       scale: scale

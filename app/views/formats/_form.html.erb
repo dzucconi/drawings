@@ -1,0 +1,13 @@
+<%= form_for(format) do |f| %>
+  <%= render 'common/errors', resource: format %>
+
+  <%= f.text_field :width, placeholder: 'Width' %>
+
+  <%= f.text_field :height, placeholder: 'Height' %>
+
+  <%= f.text_field :unit, placeholder: 'Unit' %>
+
+  <%= f.text_field :name, placeholder: 'Name' %>
+
+  <%= f.submit %>
+<% end %>

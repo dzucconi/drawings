@@ -1,0 +1,11 @@
+<%= form_for(drawing) do |f| %>
+  <%= render 'common/errors', resource: drawing %>
+
+  <%= f.select :format_id, Format.all.map { |format| [format.to_s, format.id] }, include_blank: false %>
+
+  <%= f.text_field :title, placeholder: 'Title' %>
+
+  <%= f.file_field :image %>
+
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,10 @@
+<div class='Navigation'>
+  <%= link_to 'Drawings', :root %>
+  <%= link_to 'Add format', new_format_path %>
+</div>
+
+<% @formats.each do |format| %>
+  <div class='Format'>
+    <%= link_to format, format %>
+  </div>
+<% end %>

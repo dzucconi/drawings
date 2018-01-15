@@ -1,0 +1,8 @@
+<div class='Navigation'>
+  <%= link_to 'Drawings', :root %>
+  <%= link_to 'Formats', formats_path %>
+  <%= link_to 'Edit', edit_format_path(@format) %>
+  <%= link_to 'Delete', @format, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+
+<%= @format.to_s %>

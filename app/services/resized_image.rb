@@ -1,5 +1,5 @@
 class ResizedImage
-  attr_reader :url, :width, :height, :factor, :ratio
+  attr_reader :url, :width, :height, :factor
 
   ENDPOINT = ENV['IMAGE_RESIZING_PROXY_ENDPOINT'].freeze
   CANCER_SECRET_KEY = ENV['CANCER_SECRET_KEY'].freeze
@@ -14,13 +14,11 @@ class ResizedImage
 
     @factor = [
       (width.to_f / original_width.to_f if width.present?),
-      (height.to_f / original_height.to_f if height.present?),
+      (height.to_f / original_height.to_f if height.present?)
     ].compact.min
 
     @width = ([(original_width * factor), original_width].min * scale).to_i
     @height = ([(original_height * factor), original_height].min * scale).to_i
-
-    @ratio = (@height.to_f / @width.to_f) * 100.0
   end
 
   def size(factor = 1)
@@ -50,5 +48,9 @@ class ResizedImage
       CANCER_SECRET_KEY,
       data
     )
+  end
+
+  def ratio
+    (@height.to_f / @width.to_f) * 100.0
   end
 end

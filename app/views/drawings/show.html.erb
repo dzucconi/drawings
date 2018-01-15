@@ -1,15 +1,24 @@
-<%= link_to 'Back', :back %>
+<nav class='Navigation'>
+  <%= link_to 'Return to Index', drawings_path %>
 
-<h1><%= @drawing %></h1>
+  <% if logged_in? %>
+    <%= link_to 'Edit', edit_drawing_path(@drawing) %>
+    <%= link_to 'Delete', @drawing, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</nav>
 
-<% @drawing.resized(width: 225, height: 225).tap do |image| %>
-  <img
-    src='<%= image.size(1) %>'
-    srcset='<%= image.size(1) %> 1x, <%= image.size(2) %> 2x'
-    width='<%= image.width %>'
-    height='<%= image.height %>'
-    alt='<%= @drawing %>'
-  >
-<% end %>
+<div class='Drawing'>
+  <div class='Drawing__image'>
+    <% @drawing.resized(width: 900, height: 900).tap do |image| %>
+      <%= render 'common/image', image: image, title: @drawing %>
+    <% end %>
+  </div>
 
-<%= pretty_print(@drawing.to_json) %>
+  <h1 class='Drawing__title'>
+    <%= @drawing %>
+  </h1>
+
+  <div class='Drawing__metadata'>
+    <%= @drawing.format.dimensions %>
+  </div>
+</div>
