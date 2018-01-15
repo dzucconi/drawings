@@ -1,0 +1,6 @@
+.Error {
+  color: red;
+}
+  .Error > input {
+    border-color: red;
+  }

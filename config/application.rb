@@ -27,7 +27,7 @@ module Drawings
     end
 
     config.action_view.field_error_proc = proc { |tag|
-      "<span class='Field Field--error'>#{tag}</span>".html_safe
+      "<span class='Error'>#{tag}</span>".html_safe
     }
   end
 end

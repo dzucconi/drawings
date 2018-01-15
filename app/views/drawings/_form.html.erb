@@ -1,11 +1,11 @@
-<%= form_for(drawing) do |f| %>
+<%= form_for(drawing, html: { class: 'Form' }) do |f| %>
   <%= render 'common/errors', resource: drawing %>
 
-  <%= f.select :format_id, Format.all.map { |format| [format.to_s, format.id] }, include_blank: false %>
+  <%= f.select :format_id, Format.all.map { |format| [format.to_s, format.id] }, include_blank: false, class: 'Input' %>
 
-  <%= f.text_field :title, placeholder: 'Title' %>
+  <%= f.text_field :title, placeholder: 'Title', class: 'Input' %>
 
-  <%= f.file_field :image %>
+  <%= f.file_field :image, class: 'Input' %>
 
   <%= f.submit %>
 <% end %>

@@ -1,9 +1,6 @@
 .Errors {
   list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.Error {
-  color: red;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border: 1px solid red;
 }
