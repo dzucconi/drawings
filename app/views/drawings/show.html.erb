@@ -21,4 +21,21 @@
   <div class='Drawing__metadata'>
     <%= @drawing.format.dimensions %>
   </div>
+
+  <% if @drawing.production_files.size.positive? %>
+    <div class='Drawing__production-files'>
+      <h3>Production files:</h3>
+
+      <div class='Drawing__production-file'>
+        <% @drawing.production_files.each do |file| %>
+          <%= link_to file.to_s, file.qualified_url, target: '_blank' %>
+
+          <% if logged_in? %>
+            <%= link_to 'Edit', edit_drawing_production_file_path(@drawing, file) %>
+            <%= link_to 'Delete', [@drawing, file], method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

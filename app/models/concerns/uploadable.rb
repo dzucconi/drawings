@@ -3,14 +3,8 @@ module Uploadable
 
   BUCKET = ENV['AWS_S3_BUCKET'].freeze
 
-  included do
-    validates :image_content_type, presence: true
-    validates :image_filename, presence: true
-    validates :image_filesize, presence: true
-    validates :image_width, presence: true
-    validates :image_height, presence: true
-
-    before_destroy :remove_image
+  def filename
+    raise Exception 'filename must be defined'
   end
 
   def client
@@ -26,7 +20,7 @@ module Uploadable
     )
   end
 
-  def remove_image
+  def remove_uploaded_object
     client.delete_object(
       bucket: BUCKET,
       key: key
@@ -34,11 +28,11 @@ module Uploadable
   end
 
   def extension
-    File.extname(image_filename)
+    File.extname(filename)
   end
 
   def key
-    "#{id}/#{File.basename(image_filename, extension).parameterize}#{extension}"
+    "#{self.class.to_s.pluralize.parameterize}/#{id}/#{File.basename(filename, extension).parameterize}#{extension}"
   end
 
   def presigned_url
@@ -50,27 +44,5 @@ module Uploadable
 
   def qualified_url
     "https://#{BUCKET}.s3.amazonaws.com/#{key}"
-  end
-
-  def resize_source_url
-    ResizedImage.new(
-      url: qualified_url,
-      original_width: image_width,
-      original_height: image_height,
-      width: 2500,
-      height: 2500,
-      scale: ResizedImage::DEFAULT_SCALE
-    ).size(1)
-  end
-
-  def resized(width: nil, height: nil, scale: ResizedImage::DEFAULT_SCALE)
-    ResizedImage.new(
-      url: resize_source_url,
-      original_width: image_width,
-      original_height: image_height,
-      width: width,
-      height: height,
-      scale: scale
-    )
   end
 end

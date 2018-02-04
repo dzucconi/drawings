@@ -5,7 +5,10 @@
 
   <%= f.text_field :title, placeholder: 'Title', class: 'Input' %>
 
-  <%= f.file_field :image, class: 'Input' %>
+  <div class='UploadButton'>
+    <button>Upload image</button>
+    <%= f.file_field :image %>
+  </div>
 
   <%= f.submit %>
 <% end %>

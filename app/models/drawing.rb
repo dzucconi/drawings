@@ -16,10 +16,13 @@
 
 class Drawing < ApplicationRecord
   include Uploadable
+  include Imageable
 
   validates :title, presence: true
 
   belongs_to :format
+
+  has_many :production_files, dependent: :destroy
 
   def to_s
     title || image_filename || 'untitled'
