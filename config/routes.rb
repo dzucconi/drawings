@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root to: 'drawings#index'
 
-  resources :drawings
+  resources :drawings do
+    resources :production_files
+  end
+
   resources :formats
   resources :sessions, only: [:create, :new, :destroy]
 

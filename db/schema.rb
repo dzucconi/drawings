@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110033526) do
+ActiveRecord::Schema.define(version: 20180203151534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,4 +37,16 @@ ActiveRecord::Schema.define(version: 20180110033526) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "production_files", force: :cascade do |t|
+    t.string "name"
+    t.integer "attachment_filesize"
+    t.string "attachment_content_type"
+    t.string "attachment_filename"
+    t.bigint "drawing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drawing_id"], name: "index_production_files_on_drawing_id"
+  end
+
+  add_foreign_key "production_files", "drawings"
 end

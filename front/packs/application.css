@@ -13,7 +13,7 @@ html {
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
 }
 
 a {
@@ -21,6 +21,7 @@ a {
   text-decoration: underline;
 }
 
+@import '../css/Alert';
 @import '../css/Button';
 @import '../css/Drawing';
 @import '../css/Error';
@@ -30,3 +31,4 @@ a {
 @import '../css/Input';
 @import '../css/Navigation';
 @import '../css/Page';
+@import '../css/UploadButton';

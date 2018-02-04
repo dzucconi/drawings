@@ -1,0 +1,12 @@
+<%= form_for([drawing, production_file], html: { class: 'Form' }) do |f| %>
+  <%= render 'common/errors', resource: production_file %>
+
+  <%= f.text_field :name, placeholder: 'Name', class: 'Input' %>
+
+  <div class='UploadButton'>
+    <button>Attach file</button>
+    <%= f.file_field :attachment %>
+  </div>
+
+  <%= f.submit 'Save production file' %>
+<% end %>
